@@ -47,7 +47,7 @@ public class OrderServiceTest {
 	}
 
 	@Test
-	public void 상품주문() throws Exception {
+	public void orderProduct() throws Exception {
 	    //given
 		Member member = createMember();
 
@@ -66,7 +66,7 @@ public class OrderServiceTest {
 	}
 
 	@Test
-	public void 주문취소() throws Exception {
+	public void cancelOrder() throws Exception {
 	    //given
 		Member member = createMember();
 	    Item item = createBook("12312", 10000, 10);
@@ -84,7 +84,7 @@ public class OrderServiceTest {
 	}
 
 	@Test(expected = NotEnoughStockException.class)
-	public void 상품주문_재고수량초과() throws Exception {
+	public void outOfStockException() throws Exception {
 	    //given
 		Member member = createMember();
 		Item item = createBook("ddd", 10000, 10);
