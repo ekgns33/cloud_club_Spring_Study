@@ -3,6 +3,7 @@ permissions:
   contents: read
   checks: write
   id-token: write
+  pull-requests: write
 
 on:
   push:
@@ -35,7 +36,7 @@ jobs:
         run: ./gradlew test
 
       - name: Attach Test Result Comment to PR
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
           files: '**/build/test-results/test/TEST-*.xml'
