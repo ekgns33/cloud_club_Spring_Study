@@ -1,4 +1,8 @@
 name: Java CI with Gradle
+permissions:
+  contents: read
+  checks: write
+  id-token: write
 
 on:
   push:
