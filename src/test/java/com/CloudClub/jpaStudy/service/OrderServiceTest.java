@@ -22,7 +22,6 @@ import jakarta.persistence.EntityManager;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
 public class OrderServiceTest {
 
 	@Autowired EntityManager em;
@@ -47,6 +46,8 @@ public class OrderServiceTest {
 	}
 
 	@Test
+	@Transactional
+
 	public void orderProduct() throws Exception {
 	    //given
 		Member member = createMember();
@@ -66,6 +67,8 @@ public class OrderServiceTest {
 	}
 
 	@Test
+	@Transactional
+
 	public void cancelOrder() throws Exception {
 	    //given
 		Member member = createMember();
@@ -84,6 +87,8 @@ public class OrderServiceTest {
 	}
 
 	@Test(expected = NotEnoughStockException.class)
+	@Transactional
+
 	public void outOfStockException() throws Exception {
 	    //given
 		Member member = createMember();
