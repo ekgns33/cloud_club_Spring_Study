@@ -21,5 +21,7 @@ public class ItemServiceTest {
 
 
 	}
+	@Test
+	public void save() {}
 
 }
