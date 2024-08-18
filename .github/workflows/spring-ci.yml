@@ -51,9 +51,7 @@ jobs:
         if: always()
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}  # GITHUB_TOKEN 환경 변수 사용
-
+          
   dependency-submission:
     runs-on: ubuntu-latest
     permissions:
