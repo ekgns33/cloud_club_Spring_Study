@@ -1,27 +1,28 @@
 package com.CloudClub.jpaStudy.service;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 
 import jakarta.persistence.EntityManager;
+import org.springframework.security.test.context.support.WithMockUser;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class ItemServiceTest {
+class ItemServiceTest {
 
 	@Autowired
 	EntityManager em;
 
 	@Test
+	@WithMockUser
 	public void update() throws Exception {
 
 
 	}
 	@Test
+	@WithMockUser
 	public void save() {}
 
 }

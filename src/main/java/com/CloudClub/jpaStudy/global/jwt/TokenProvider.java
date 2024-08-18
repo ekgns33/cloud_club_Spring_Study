@@ -16,9 +16,6 @@ import com.CloudClub.jpaStudy.service.TokenService;
 @Component
 public class TokenProvider {
 
-  @Value("${jwt.secret}")
-  private String JWT_KEY;
-
   private static final long ACCESS_TOKEN_VALID_TIME =  1000 * 60 * 30; // 30 min
   private static final long REFRESH_TOKEN_VALID_TIME = 1000 * 60 * 5; // 5 hour
   private static final String KEY_ROLE = "role";
