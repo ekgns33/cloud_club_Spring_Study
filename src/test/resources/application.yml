@@ -1,5 +1,0 @@
-spring:
-logging:  # print with logger
-  level:
-    org.hibernate.SQL: debug
-    org.hibernate.orm.jdbc.bind: trace

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.CloudClub.jpaStudy.MemberRepository;
+import com.CloudClub.jpaStudy.repository.MemberRepository;
 import com.CloudClub.jpaStudy.domain.Member;
 
 import lombok.RequiredArgsConstructor;

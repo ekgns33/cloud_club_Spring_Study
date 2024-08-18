@@ -1,7 +1,8 @@
-package com.CloudClub.jpaStudy;
+package com.CloudClub.jpaStudy.repository;
 
 import java.util.List;
 
+import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.CloudClub.jpaStudy.domain.Member;
@@ -18,11 +19,10 @@ public class MemberRepository {
 
 	// Separate Command and Query
 
-	public void save(Member member) {
-
-		// 영속성 컨텍스트에 올림.
-		// id값이 키가된다.
+	public Member save(Member member) {
 		em.persist(member);
+		em.flush();
+		return member;
 	}
 
 	public Member findOne(Long id) {
@@ -38,5 +38,13 @@ public class MemberRepository {
 		return em.createQuery("select m from Member m where m.name = :name", Member.class)
 			.setParameter("name", name)
 			.getResultList();
+	}
+
+	public Optional<Member> findByEmail(String email) {
+		return em.createQuery("select m from Member m where m.email = :email", Member.class)
+        .setParameter("email", email)
+        .getResultList()
+        .stream()
+        .findFirst();
 	}
 }

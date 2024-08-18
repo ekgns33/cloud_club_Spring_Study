@@ -1,28 +1,28 @@
 package com.CloudClub.jpaStudy.service;
 
-import static org.junit.Assert.*;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.aspectj.bridge.MessageUtil.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
+
+import com.CloudClub.jpaStudy.exception.NotEnoughStockException;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.CloudClub.jpaStudy.OrderRepository;
+import com.CloudClub.jpaStudy.repository.OrderRepository;
 import com.CloudClub.jpaStudy.domain.Address;
 import com.CloudClub.jpaStudy.domain.Item;
 import com.CloudClub.jpaStudy.domain.Member;
 import com.CloudClub.jpaStudy.domain.Order;
 import com.CloudClub.jpaStudy.domain.OrderStatus;
 import com.CloudClub.jpaStudy.domain.item.Book;
-import com.CloudClub.jpaStudy.exception.NotEnoughStockException;
-
 import jakarta.persistence.EntityManager;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class OrderServiceTest {
+class OrderServiceTest {
 
 	@Autowired EntityManager em;
 	@Autowired OrderService orderService;
@@ -38,8 +38,9 @@ public class OrderServiceTest {
 	}
 
 	private Member createMember() {
-		Member member = new Member();
-		member.setName("1");
+		Member member= Member.builder()
+				.name("kim")
+				.build();
 		member.setAddress(new Address("a", "b", "c"));
 		em.persist(member);
 		return member;
@@ -47,7 +48,6 @@ public class OrderServiceTest {
 
 	@Test
 	@Transactional
-
 	public void orderProduct() throws Exception {
 	    //given
 		Member member = createMember();
@@ -86,9 +86,8 @@ public class OrderServiceTest {
 		assertEquals("주문이 취소되면 재고가 다시 증가해야한다", 10, item.getStockQuantity());
 	}
 
-	@Test(expected = NotEnoughStockException.class)
+	@Test
 	@Transactional
-
 	public void outOfStockException() throws Exception {
 	    //given
 		Member member = createMember();
@@ -96,9 +95,9 @@ public class OrderServiceTest {
 		int orderCount = 11;
 	    //when
 
-
-		orderService.order(member.getId(), item.getId(), orderCount);
-	    //then
+			//then
 		fail("재고 수량 부족 예외가 발생해야한다.");
+		assertThrows(NotEnoughStockException.class,
+				() -> orderService.order(member.getId(), item.getId(), orderCount));
 	}
 }
