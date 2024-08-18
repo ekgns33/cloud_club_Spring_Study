@@ -38,8 +38,9 @@ public class OrderServiceTest {
 	}
 
 	private Member createMember() {
-		Member member = new Member();
-		member.setName("1");
+		Member member= Member.builder()
+				.name("kim")
+				.build();
 		member.setAddress(new Address("a", "b", "c"));
 		em.persist(member);
 		return member;
