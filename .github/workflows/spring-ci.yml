@@ -32,6 +32,13 @@ jobs:
       - name: Grant permission to gradle
         run: chmod +x gradlew
 
+      - name: touch application.yml
+        run: |
+          mkdir ./src/main/resources
+          touch ./src/main/resources/application.yml
+          echo "${{ secrets.APPLICATION_DEV_YML }}" > ./src/main/resources/application.yml
+        shell: bash
+
       - name: Start tests
         run: ./gradlew test
 
