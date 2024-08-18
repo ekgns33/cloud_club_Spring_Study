@@ -1,4 +1,4 @@
-package com.CloudClub.jpaStudy;
+package com.CloudClub.jpaStudy.controller;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

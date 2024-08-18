@@ -1,4 +1,4 @@
-package com.CloudClub.jpaStudy;
+package com.CloudClub.jpaStudy.controller;
 
 import java.util.List;
 
@@ -12,7 +12,6 @@ import com.CloudClub.jpaStudy.domain.Address;
 import com.CloudClub.jpaStudy.domain.Member;
 import com.CloudClub.jpaStudy.service.MemberService;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -36,7 +35,10 @@ public class MemberController {
 
 		Address address = new Address(memberForm.getCity(), memberForm.getStreet(), memberForm.getZipcode());
 
-		Member member = new Member();
+		Member member = Member.builder()
+						.name(memberForm.getName())
+						.build();
+
 		member.setName(memberForm.getName());
 		member.setAddress(address);
 
