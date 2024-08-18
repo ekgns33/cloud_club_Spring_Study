@@ -1,4 +1,4 @@
-package com.CloudClub.jpaStudy;
+package com.CloudClub.jpaStudy.controller;
 
 import com.CloudClub.jpaStudy.domain.OrderStatus;
 

@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.CloudClub.jpaStudy.OrderRepository;
+import com.CloudClub.jpaStudy.repository.OrderRepository;
 import com.CloudClub.jpaStudy.domain.Address;
 import com.CloudClub.jpaStudy.domain.Item;
 import com.CloudClub.jpaStudy.domain.Member;

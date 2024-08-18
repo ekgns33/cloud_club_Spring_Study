@@ -1,4 +1,4 @@
-package com.CloudClub.jpaStudy;
+package com.CloudClub.jpaStudy.repository;
 
 import java.util.List;
 

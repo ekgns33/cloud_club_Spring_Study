@@ -1,14 +1,11 @@
 package com.CloudClub.jpaStudy.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.CloudClub.jpaStudy.ItemRepository;
-import com.CloudClub.jpaStudy.MemberRepository;
-import com.CloudClub.jpaStudy.OrderRepository;
-import com.CloudClub.jpaStudy.OrderSearch;
+import com.CloudClub.jpaStudy.repository.ItemRepository;
+import com.CloudClub.jpaStudy.repository.MemberRepository;
+import com.CloudClub.jpaStudy.repository.OrderRepository;
 import com.CloudClub.jpaStudy.domain.Delivery;
 import com.CloudClub.jpaStudy.domain.Item;
 import com.CloudClub.jpaStudy.domain.Member;

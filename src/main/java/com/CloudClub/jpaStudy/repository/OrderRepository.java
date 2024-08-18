@@ -1,5 +1,6 @@
-package com.CloudClub.jpaStudy;
+package com.CloudClub.jpaStudy.repository;
 
+import com.CloudClub.jpaStudy.controller.OrderSearch;
 import java.util.ArrayList;
 import java.util.List;
 
