@@ -47,6 +47,8 @@ jobs:
 
       - name: Attach Test Result Comment to PR
         uses: EnricoMi/publish-unit-test-result-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
         if: always()
         with:
           files: '**/build/test-results/test/TEST-*.xml'
