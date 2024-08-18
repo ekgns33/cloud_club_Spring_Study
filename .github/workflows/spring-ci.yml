@@ -3,7 +3,7 @@ permissions:
   contents: read
   checks: write
   id-token: write
-  pull-requests: write
+  pull-requests: write  # PR에 코멘트를 달기 위한 권한 추가
 
 on:
   push:
@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: write  # 이 부분도 추가하여 워크플로우에서 PR에 접근할 수 있도록 설정
 
     steps:
       - name: Checkout repo
@@ -47,18 +48,19 @@ jobs:
 
       - name: Attach Test Result Comment to PR
         uses: EnricoMi/publish-unit-test-result-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
         if: always()
         with:
           files: '**/build/test-results/test/TEST-*.xml'
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}  # GITHUB_TOKEN 환경 변수 사용
 
       - name: Test report
         uses: mikepenz/action-junit-report@v4
         if: always()
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'
-
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}  # GITHUB_TOKEN 환경 변수 사용
 
   dependency-submission:
     runs-on: ubuntu-latest
