@@ -1,7 +1,9 @@
-package com.CloudClub.jpaStudy.global.configs.securities;
+package com.CloudClub.jpaStudy.global.security.configs;
 
 import com.CloudClub.jpaStudy.auth.CustomOAuth2UserService;
 import com.CloudClub.jpaStudy.auth.OAuth2SuccessHandler;
+import com.CloudClub.jpaStudy.global.security.filters.TokenAuthenticationFilter;
+import com.CloudClub.jpaStudy.global.security.filters.TokenExceptionFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,6 +53,7 @@ public class SecurityConfig {
             request
                 .requestMatchers(
                     new AntPathRequestMatcher("/"),
+                    new AntPathRequestMatcher("/h2-console/**"),
                     new AntPathRequestMatcher("/home"),
                     new AntPathRequestMatcher("/success"),
                     new AntPathRequestMatcher("/custom-login"),
@@ -64,11 +67,13 @@ public class SecurityConfig {
         .oauth2Login(oauth2 ->
             oauth2
                 .loginPage("/custom-login")
-                .userInfoEndpoint(c -> c.userService(oAuth2UserService))
+                .userInfoEndpoint(
+                    c -> c.userService(oAuth2UserService)
+                )
                 .successHandler(oAuth2SuccessHandler))
         .addFilterBefore(tokenAuthenticationFilter,
-          UsernamePasswordAuthenticationFilter.class)
-        .addFilterBefore(new TokenExceptionFilter(), tokenAuthenticationFilter.getClass());// 토큰 예외 핸들링
+            UsernamePasswordAuthenticationFilter.class)
+        .addFilterBefore(tokenExceptionFilter, tokenAuthenticationFilter.getClass());// 토큰 예외 핸들링
 
     return http.build();
   }

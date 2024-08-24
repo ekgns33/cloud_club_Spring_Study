@@ -1,22 +1,19 @@
 package com.CloudClub.jpaStudy.global.jwt;
 
+import com.CloudClub.jpaStudy.service.member.TokenService;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
-
-import com.CloudClub.jpaStudy.service.TokenService;
 
 @RequiredArgsConstructor
 @Component
 public class TokenProvider {
 
-  private static final long ACCESS_TOKEN_VALID_TIME =  1000 * 60 * 30; // 30 min
+  private static final long ACCESS_TOKEN_VALID_TIME = 1000 * 60 * 30; // 30 min
   private static final long REFRESH_TOKEN_VALID_TIME = 1000 * 60 * 5; // 5 hour
   private static final String KEY_ROLE = "role";
 
@@ -27,7 +24,7 @@ public class TokenProvider {
   }
 
   public String generateRefreshToken(Authentication authentication) {
-    String refreshToken =  generateToken(authentication, REFRESH_TOKEN_VALID_TIME);
+    String refreshToken = generateToken(authentication, REFRESH_TOKEN_VALID_TIME);
     tokenService.saveRefreshToken(authentication.getName(), refreshToken, REFRESH_TOKEN_VALID_TIME);
     return refreshToken;
   }

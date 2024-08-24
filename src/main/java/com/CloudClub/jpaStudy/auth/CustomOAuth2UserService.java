@@ -1,11 +1,12 @@
 package com.CloudClub.jpaStudy.auth;
 
-import static com.CloudClub.jpaStudy.global.configs.MemberMapper.mapOAuth2InfoToMember;
+import static com.CloudClub.jpaStudy.global.MemberMapper.mapOAuth2InfoToMember;
 
-import com.CloudClub.jpaStudy.domain.Member;
+import com.CloudClub.jpaStudy.domain.member.Member;
 import com.CloudClub.jpaStudy.repository.MemberRepository;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -14,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
+
   private final MemberRepository memberRepository;
 
   @Transactional
@@ -28,7 +31,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     Member member = fetchAndSaveIfAbsent(oAuth2UserInfo);
 
     // 6. OAuth2User로 반환
-    return new PrincipalDetails(member, oAuth2UserAttributes, userNameAttributeName);
+    log.info("OAuth2User: {}", member);
+
+    PrincipalDetails principalDetails = new PrincipalDetails(member, oAuth2UserAttributes,
+        userNameAttributeName);
+    log.info("PrincipalDetails: {}", principalDetails);
+
+    return principalDetails;
   }
 
   private Member fetchAndSaveIfAbsent(OAuth2UserInfo oAuth2UserInfo) {

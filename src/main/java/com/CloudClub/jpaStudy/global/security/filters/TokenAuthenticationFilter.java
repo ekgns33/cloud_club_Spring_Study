@@ -1,4 +1,4 @@
-package com.CloudClub.jpaStudy.global.configs.securities;
+package com.CloudClub.jpaStudy.global.security.filters;
 
 import static com.CloudClub.jpaStudy.global.jwt.TokenUtils.parseClaims;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -22,9 +23,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 @RequiredArgsConstructor
 @Component
+@Slf4j
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
   private final TokenProvider tokenProvider;
+
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
       FilterChain filterChain) throws ServletException, IOException {
@@ -52,20 +55,16 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
   }
 
   public boolean validateToken(String token) {
-    System.out.println("tokentest");
     if (!StringUtils.hasText(token)) {
       return false;
     }
-    System.out.println("parseClaims");
     Claims claims = parseClaims(token);
-    System.out.println(claims.getExpiration());
     return claims.getExpiration().after(new Date());
   }
 
   private void setAuthentication(String accessToken) {
     Authentication authentication = TokenUtils.getAuthentication(accessToken);
     SecurityContextHolder.getContext().setAuthentication(authentication);
-    System.out.println("setAuthentication");
   }
 
   private String resolveToken(HttpServletRequest request) {

@@ -1,4 +1,4 @@
-package com.CloudClub.jpaStudy.global.configs.securities;
+package com.CloudClub.jpaStudy.global.security.filters;
 
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 

@@ -7,22 +7,21 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.Keys;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TokenUtils {
 
-  private final String secretKey;
   public static SecretKey STATIC_SECRET_KEY;
+  private final String secretKey;
 
-  public TokenUtils(  @Value("${jwt.secret}")
+  public TokenUtils(@Value("${jwt.secret}")
   String secretKey) {
     this.secretKey = secretKey;
     STATIC_SECRET_KEY = Keys.hmacShaKeyFor(this.secretKey.getBytes());
@@ -31,7 +30,7 @@ public class TokenUtils {
   public static Authentication getAuthentication(String token) {
     Claims claims = parseClaims(token);
     List<SimpleGrantedAuthority> authorities = getAuthorities(claims);
-    User principal =  new User(claims.getSubject(), "", authorities);
+    User principal = new User(claims.getSubject(), "", authorities);
 
     return new UsernamePasswordAuthenticationToken(principal, token, authorities);
   }
