@@ -5,19 +5,19 @@ import static org.aspectj.bridge.MessageUtil.fail;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
-import com.CloudClub.jpaStudy.exception.NotEnoughStockException;
+import com.CloudClub.jpaStudy.domain.item.exception.NotEnoughStockException;
+import com.CloudClub.jpaStudy.service.orders.OrderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.CloudClub.jpaStudy.repository.OrderRepository;
-import com.CloudClub.jpaStudy.domain.Address;
-import com.CloudClub.jpaStudy.domain.Item;
-import com.CloudClub.jpaStudy.domain.Member;
-import com.CloudClub.jpaStudy.domain.Order;
-import com.CloudClub.jpaStudy.domain.OrderStatus;
+import com.CloudClub.jpaStudy.domain.member.Address;
+import com.CloudClub.jpaStudy.domain.item.Item;
+import com.CloudClub.jpaStudy.domain.member.Member;
+import com.CloudClub.jpaStudy.domain.order.Order;
+import com.CloudClub.jpaStudy.domain.order.OrderStatus;
 import com.CloudClub.jpaStudy.domain.item.Book;
 import jakarta.persistence.EntityManager;
 
@@ -25,7 +25,8 @@ import jakarta.persistence.EntityManager;
 class OrderServiceTest {
 
 	@Autowired EntityManager em;
-	@Autowired OrderService orderService;
+	@Autowired
+	OrderService orderService;
 	@Autowired OrderRepository orderRepository;
 
 	private Item createBook(String name, int price, int stockQuantity) {

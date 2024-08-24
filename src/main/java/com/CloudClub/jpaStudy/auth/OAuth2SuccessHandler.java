@@ -16,14 +16,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Component
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
-  private final TokenProvider tokenProvider;
   private static final String URI = "/success";
+  private final TokenProvider tokenProvider;
 
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
       Authentication authentication) throws IOException, ServletException {
     String accessToken = tokenProvider.generateAccessToken(authentication);
     String refreshToken = tokenProvider.generateRefreshToken(authentication);
+
+    System.out.println(authentication.isAuthenticated());
 
     Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
     refreshTokenCookie.setHttpOnly(true);

@@ -1,14 +1,14 @@
 package com.CloudClub.jpaStudy.controller;
 
-import com.CloudClub.jpaStudy.domain.OrderStatus;
-
+import com.CloudClub.jpaStudy.domain.order.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class OrderSearch {
 
-	private String memberName; // member name
-	private OrderStatus orderStatus;
+  private String memberName; // member name
+  private OrderStatus orderStatus;
 
 }

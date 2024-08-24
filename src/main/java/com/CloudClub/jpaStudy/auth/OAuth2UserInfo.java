@@ -6,9 +6,10 @@ import lombok.Getter;
 
 @Getter
 public class OAuth2UserInfo {
-  private String name;
-  private String email;
-  private String profile;
+
+  private final String name;
+  private final String email;
+  private final String profile;
 
   @Builder
   private OAuth2UserInfo(String name, String email, String profile) {
@@ -20,7 +21,7 @@ public class OAuth2UserInfo {
   public static OAuth2UserInfo of(String registrationId, Map<String, Object> attributes) {
     switch (registrationId) {
       case "kakao":
-        return ofKakao( attributes);
+        return ofKakao(attributes);
       case "google":
         return ofGoogle(attributes);
       default:

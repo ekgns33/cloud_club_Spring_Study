@@ -1,6 +1,6 @@
 package com.CloudClub.jpaStudy.auth;
 
-import com.CloudClub.jpaStudy.domain.Member;
+import com.CloudClub.jpaStudy.domain.member.Member;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -10,9 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 public class PrincipalDetails implements OAuth2User, UserDetails {
-  private Member member;
-  private Map<String, Object> attributes;
-  private String attributeKey;
+
+  private final Member member;
+  private final Map<String, Object> attributes;
+  private final String attributeKey;
 
   public PrincipalDetails(Member member, Map<String, Object> attributes, String attributeKey) {
     this.member = member;
@@ -39,7 +40,7 @@ public class PrincipalDetails implements OAuth2User, UserDetails {
 
   @Override
   public String getUsername() {
-    return member.getEmail();
+    return String.valueOf(member.getId());
   }
 
   @Override
@@ -65,5 +66,9 @@ public class PrincipalDetails implements OAuth2User, UserDetails {
   @Override
   public String getName() {
     return attributes.get(attributeKey).toString();
+  }
+
+  public Long getUserId() {
+    return member.getId();
   }
 }
