@@ -1,6 +1,7 @@
-package com.CloudClub.jpaStudy.service;
+package com.CloudClub.jpaStudy.service.member;
 
-import com.CloudClub.jpaStudy.domain.RefreshToken;
+import com.CloudClub.jpaStudy.domain.member.RefreshToken;
+import com.CloudClub.jpaStudy.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TokenService {
 
-  private final RefreshTokenRepository refreshTokenRepository;
+  private final OrderRepository.RefreshTokenRepository refreshTokenRepository;
 
   @Transactional
   public void saveRefreshToken(String username, String refreshToken, Long expiration) {

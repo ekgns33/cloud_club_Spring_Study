@@ -1,4 +1,4 @@
-package com.CloudClub.jpaStudy.domain;
+package com.CloudClub.jpaStudy.domain.member;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -7,8 +7,8 @@ import lombok.Getter;
 @Getter
 public class RefreshToken {
 
-  private String token;
-  private LocalDateTime expiration;
+  private final String token;
+  private final LocalDateTime expiration;
 
   public RefreshToken(String token, Long expiration) {
     this.token = token;

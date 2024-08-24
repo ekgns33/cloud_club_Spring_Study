@@ -1,4 +1,4 @@
-package com.CloudClub.jpaStudy.domain;
+package com.CloudClub.jpaStudy.domain.member;
 
 import lombok.Getter;
 
@@ -8,7 +8,7 @@ public enum MemberRole {
   ADMIN("ROLE_ADMIN"),
   USER("ROLE_USER");
 
-  private String key;
+  private final String key;
 
   MemberRole(String key) {
     this.key = key;
