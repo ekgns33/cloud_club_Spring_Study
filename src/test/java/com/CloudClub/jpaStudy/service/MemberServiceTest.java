@@ -5,6 +5,7 @@ import static org.assertj.core.api.BDDAssertions.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.CloudClub.jpaStudy.service.member.MemberService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,13 +13,14 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.CloudClub.jpaStudy.repository.MemberRepository;
-import com.CloudClub.jpaStudy.domain.Member;
+import com.CloudClub.jpaStudy.domain.member.Member;
 
 @SpringBootTest
 @Transactional
 public class MemberServiceTest {
 
-	@Autowired MemberService memberService;
+	@Autowired
+	MemberService memberService;
 	@Autowired MemberRepository memberRepository;
 
 

@@ -6,10 +6,12 @@ import lombok.Getter;
 public class FollowingInfo {
 
   private final Long id;
+  private final Long followingId;
   private final String name;
 
-  public FollowingInfo(Long id, String name) {
+  public FollowingInfo(Long id, Long followingId, String name) {
     this.id = id;
+    this.followingId = followingId;
     this.name = name;
   }
 }

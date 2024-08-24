@@ -33,7 +33,7 @@ public class ConnectionRepository {
 
   public List<FollowingInfo> findFollowingByMemberId(Long memberId) {
     String jpql =
-        "SELECT new com.CloudClub.jpaStudy.service.follow.model.response.FollowingInfo(m1.id, m2.name) "
+        "SELECT new com.CloudClub.jpaStudy.service.follow.model.response.FollowingInfo(m1.id, m2.id, m2.name) "
             +
             "FROM Member m1 " +
             "JOIN Connection c ON m1.id = c.from.id " +
